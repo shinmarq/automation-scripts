@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: script-execution-pod
+  namespace: <namespace>
+spec:
+  serviceAccountName: cronjob-sa
+  containers:
+  - name: script-container
+    image: <image>  # Use the Docker image that includes your script
+    # command: ["/bin/sh", "-c"]
+    # args:
+    # - /app/restartnginx.sh  

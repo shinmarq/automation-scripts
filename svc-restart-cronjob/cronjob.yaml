@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nginx-restart-cron
+  namespace: nginx
+spec:
+  schedule: "0 0 1 * *" # Cron expression for running at midnight on the 1st of each month
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: cronjob-sa
+          containers:
+          - name: pod-restart-container
+            image: <image>
+            # You can also use command and args to specify the script and arguments
+            # command: ["/bin/bash"]
+            # args: ["-c", "./restartnginx.sh"]
+          restartPolicy: OnFailure
